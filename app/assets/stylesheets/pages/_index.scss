@@ -5,3 +5,94 @@
 @import "comment";
 @import "article";
 @import "modal";
+
+@media screen and (max-width: 1920px) {
+  .topline {
+    font-size: 23px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 30px;
+    padding-bottom: 10px;
+  }
+  .sectioncard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  p {
+    font-size: 13px;
+  }
+  .commenttitle {
+    position: relative;
+    top: 0;
+    left: 176px;
+  }
+
+  .grid-b {
+    padding: 0%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    margin-top: 69%;
+    height: 45%;
+    width: 110%;
+    border-radius: 10%;
+    justify-self: center;
+  }
+  .articletitre {
+    position: relative;
+    top: -83px;
+    right: 373px;
+    /* font-size: 27px; */
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 12%;
+    margin-left: -16%;
+  }
+  .article {
+    bottom: 37px;
+    right: 205px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin: 2%;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+  }
+  .row {
+    gap: 19px;
+  }
+  #comments {
+    width: 83%;
+    margin-rigt: 27%;
+    margin-left: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    /* margin: 4%; */
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+  }
+  .articlelien {
+    justify-content: center;
+    display: flex;
+    text-decoration: none;
+  }
+}

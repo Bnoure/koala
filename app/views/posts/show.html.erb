@@ -3,8 +3,9 @@
     <% if @post.image.attached? %>
       <%= image_tag url_for(@post.image), style: 'border-top-left-radius: 25px;
     border-top-right-radius: 25px;height: 50%;' %>
-      <%= link_to "link text...", posts_path(@post)  %>
+
       <p> <%= @post.short %></p>
+      <%= link_to "link text...", @post.url, class:"articlelien"  %>
 
     <% end %>
   </div>
@@ -25,7 +26,7 @@
 <h2 class="commenttitle">Espace commentaires</h2>
   <div id="comments" data-target="comments.comments" class="row">
 
-    <% @post.comments.each_slice(5) do |slice| %>
+    <% @post.comments.each_slice(3) do |slice| %>
       <div class="row">
         <% slice.each do |comment| %>
            <%= image_tag comment.user.avatar, class: 'avatarcomment' if comment.user.avatar.attached? %>
