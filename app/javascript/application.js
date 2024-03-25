@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const form = document.querySelector('form.new_comment');
 
   form.addEventListener('submit', function(e) {
-    if (commentInput.value.length > 180) {
+    if (commentInput.value.length > 500) {
       e.preventDefault();
       alert('Votre commentaire ne peut pas dépasser 180 caractères.');
     }

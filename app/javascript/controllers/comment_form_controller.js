@@ -8,7 +8,7 @@ export default class extends Controller {
   }
 
   checkLength() {
-    if (this.contentTarget.value.length > 180) {
+    if (this.contentTarget.value.length > 500) {
       alert('Votre commentaire ne peut pas dépasser 180 caractères.');
     }
   }

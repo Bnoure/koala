@@ -5,7 +5,7 @@
     border-top-right-radius: 25px;height: 50%;' %>
 
       <p> <%= @post.short %></p>
-      <%= link_to "link text...", @post.url, class:"articlelien"  %>
+      <%= link_to "Vous voulez en savoir plus...", @post.url, class:"articlelien", style: "font-size: 13px;"  %>
 
     <% end %>
   </div>
@@ -18,8 +18,8 @@
 
   <div class="grid-c" style="grid-area: c;">
     <%= simple_form_for([@post, Comment.new], html: { data: { controller: "comment-form" } }) do |f| %>
-      <%= f.input :content, label: 'New Comment', input_html: { data: { action: "input->comment-form#checkLength", target: "comment-form.content" } } %>
-      <%= f.button :submit %>
+      <%= f.input :content, label: 'Ajouter votre commentaire', input_html: { data: { action: "input->comment-form#checkLength", target: "comment-form.content" } } %>
+      <%= f.button :submit, 'Envoyez le ', class: 'custom-button' %>
     <% end %>
   </div>
 </div>

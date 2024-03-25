@@ -116,4 +116,21 @@
     display: flex;
     text-decoration: none;
   }
+
+  .grid-c {
+    width: 525px;
+    bottom: 37px;
+    right: -33px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    margin-top: 20px;
+    margin: 2%;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+  }
 }
