@@ -1,1 +1,32 @@
 // Specific CSS for your home-page
+.topline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+body {
+  overflow-x: hidden;
+}
+.pied,
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 40vh; /* Ajustez cette valeur en fonction de la hauteur souhaitée pour le pied de page */
+
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: center;
+}
+
+.descript {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 320%;
+  text-shadow: 6px 6px 0px rgba(0, 0, 0, 0.2);
+  color: white;
+  white-space: pre-wrap;
+}

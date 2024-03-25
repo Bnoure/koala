@@ -1,7 +1,7 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand" do %>
-      <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
+    <%= link_to posts_path, class: "navbar-brand" do %>
+      <%= image_tag "logo.png" %>
     <% end %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,26 +12,83 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
+            <%= link_to "Home", posts_path, class: "nav-link", style: "padding-right: 20px; font-size: 18px; margin-top: 20px; " %>
           </li>
-          <li class="nav-item">
-            <%= link_to "Messages", "#", class: "nav-link" %>
-          </li>
+          <div class="about" data-controller="modal">
+            <!-- ... -->
+            <li>
+              <button class="nav-link" style="padding-right: 20px; font-size: 18px; margin-top: 20px;border: none" data-action="click->modal#open">About</button>
+              <dialog id="dialog" data-modal-target="dialog">
+                <div class="modal-content">
+                  <%= image_tag "nour.jpg", class:"avatarNour"%>
+                  <h3>👋 Hey, je suis Nour-Eddine Benkerroum</h3>
+                  <p>🚀 Passionné par le développement web, Je poursuis ma passion pour le développement web après avoir complété ma formation chez Le Wagon, me préparant à embrasser pleinement la carrière de développeur full stack. Fort d'une expérience antérieure en tant que chef de projet IT, j'ai décidé de changer de cap pour embrasser pleinement le monde du développement. Mon objectif est d'acquérir une expertise solide dans l'écosystème JavaScript, en me concentrant sur React, TypeScript, Node.js, et plus encore.</p>
+                  <hr>
+                  <h4>🌱 Ce que j'apprends actuellement</h4>
+                  <ul>
+                    <li>JavaScript: Découverte des fondamentaux et des concepts avancés pour des applications interactives.</li>
+                    <li>React: Immersion dans la création d'interfaces utilisateur dynamiques et réactives.</li>
+                    <li>TypeScript: Apprentissage de ce langage pour renforcer la qualité et la maintenabilité du code.</li>
+                    <li>Node.js: Exploration de l'environnement serveur pour développer des applications web complètes.</li>
+                  </ul>
+                  <hr>
+                  <h4>🎯 Mes intérêts</h4>
+                  <ul>
+                    <li>Développement Full Stack: Aspirer à devenir un développeur versatile capable de travailler à la fois sur le front-end et le back-end.</li>
+                    <li>Ecosystème JavaScript: Se spécialiser dans l'écosystème JS pour créer des applications modernes et performantes.</li>
+                    <li>Ruby on Rails: Approfondir mes connaissances et compétences en Ruby on Rails pour développer des applications web dynamiques et évolutives.</li>
+                    <li>Apprentissage Continu: Reste à l'affût des dernières technologies et meilleures pratiques en développement web.</li>
+                  </ul>
+                  <hr>
+                  <h4>📫 Me contacter</h4>
+                  <ul>
+                    <li><a href="mailto:noureddine.benkerroum@gmail.com">Mail</a></li>
+                    <li><a href="https://www.linkedin.com/in/nbenkerroum/">Linkedin</a></li>
+                  </ul>
+                  <button data-action="click->modal#close" data-modal-target="x" aria-label="close" class="x">❌</button>
+                </div>
+              </dialog>
+            </li>
+            <!-- ... -->
+          </div>
           <li class="nav-item dropdown">
-          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
-          </a>
+            <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <% if current_user.avatar.attached? %>
+                <%= image_tag current_user.avatar, class: "avatar", alt: "dropdown menu" %>
+              <% else %>
+                <%= image_tag "https://i.pravatar.cc/300", class: "avatar", alt: "dropdown menu" %>
+              <% end %>
+            </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+              <%#= link_to "Action", "#", class: "dropdown-item" %>
+              <%#= link_to "Another action", "#", class: "dropdown-item" %>
+              <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %>
             </div>
           </li>
         <% else %>
-          <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-          </li>
-        <% end %>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false", style = "font-size: larger">
+      <span style="font-size: 10px"> </span>Connexion
+    </a>
+
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <%= form_for(User.new, url: user_session_path) do |f| %>
+        <div class="mb-3">
+          <%= f.label :email, class: "form-label", style:"font-size: larger" %>
+          <%= f.email_field :email, class: "form-control", style: "width: 190%;" %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :password, class: "form-label", style:"font-size: larger" %>
+          <%= f.password_field :password, class: "form-control", style: "width: 190%;" %>
+        </div>
+        <%= f.submit "Se connecter", class: "custom-button", style: "margin-left: 68%;
+
+    height: 22%;
+    width: 77%;" %>
+      <% end %>
+    </div>
+  </li>
+<% end %>
       </ul>
     </div>
   </div>

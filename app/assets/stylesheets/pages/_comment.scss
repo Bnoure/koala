@@ -1,0 +1,58 @@
+#comments {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  margin: 6%;
+  padding: 20px;
+  background-color: #ffffff; // Choisissez la couleur de fond que vous préférez
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25); // Ajustez ces valeurs pour obtenir l'effet d'ombre désiré
+  border-radius: 10px; // Ajustez cette valeur pour obtenir les coins arrondis désirés
+  .comment {
+    margin-top: 20px;
+    .comment-content {
+      margin-top: 10px;
+    }
+  }
+}
+
+.avatarcomment {
+  width: 70px; // Ajustez cette valeur à la taille souhaitée
+  height: 50px; // Ajustez cette valeur à la taille souhaitée
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 30px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 0.4fr 0.8fr;
+  /* grid-template-rows: 0.4fr 1.9fr 1.2fr; */
+  gap: 0px 280px;
+  grid-template-areas:
+    "b b a"
+    "b b c"
+    "b b c";
+}
+
+.grid-b {
+  display: flex;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  margin-top: 69%;
+  height: 45%;
+  width: 103%;
+  border-radius: 10%;
+}
+
+.commenttitle {
+  position: sticky;
+  top: 0;
+}
+
+.grid-a {
+  width: 150%;
+}

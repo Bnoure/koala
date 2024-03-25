@@ -1,0 +1,41 @@
+<div class="container" style="display: grid; grid-template-areas: 'b b a' 'b b c' 'b b c';">
+  <div class="grid-b" style="grid-area: b;">
+    <% if @post.image.attached? %>
+      <%= image_tag url_for(@post.image), style: 'border-top-left-radius: 25px;
+    border-top-right-radius: 25px;height: 50%;' %>
+      <%= link_to "link text...", posts_path(@post)  %>
+      <p> <%= @post.short %></p>
+
+    <% end %>
+  </div>
+
+  <div class="grid-a" style="grid-area: a;">
+    <h1 class= "articletitre"><%= @post.title  %></h1>
+    <p class="article"><%= @post.description %></p>
+
+  </div>
+
+  <div class="grid-c" style="grid-area: c;">
+    <%= simple_form_for([@post, Comment.new], html: { data: { controller: "comment-form" } }) do |f| %>
+      <%= f.input :content, label: 'New Comment', input_html: { data: { action: "input->comment-form#checkLength", target: "comment-form.content" } } %>
+      <%= f.button :submit %>
+    <% end %>
+  </div>
+</div>
+<h2 class="commenttitle">Espace commentaires</h2>
+  <div id="comments" data-target="comments.comments" class="row">
+
+    <% @post.comments.each_slice(5) do |slice| %>
+      <div class="row">
+        <% slice.each do |comment| %>
+           <%= image_tag comment.user.avatar, class: 'avatarcomment' if comment.user.avatar.attached? %>
+          <div class="col">
+            <strong><%= comment.user.nickname == current_user.nickname ? "Vous" : comment.user.nickname %></strong>
+
+            <p><%= comment.content %></p>
+            <p><%= comment.created_at.strftime("%d/%m/%Y à %H:%M") %></p>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>

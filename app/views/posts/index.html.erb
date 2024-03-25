@@ -1,0 +1,18 @@
+<h1 class="topline">Koala Insights : Découvrez, Apprenez, Inspirez. Explorez chaque histoire.</h1>
+
+<div class="sectioncard" data-controller="listof">
+  <% @posts.each_slice(4).with_index do |slice, slice_index| %>
+    <div class="row">
+      <% slice.each_with_index do |post, index| %>
+        <div class="col-md-3 col-custom-spacing" data-listof-target="list" class="<%= 'post' if slice_index * 4 + index < 4 %> <%= 'post d-none' if slice_index * 4 + index >= 4 %>">
+          <%= render post %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="cardmove">
+  <button type="button" data-action="listof#loadPrevious" class="custom-prev-button">Previous</button>
+  <button type="button" data-action="listof#loadNext" class="custom-button"><span>Next</span></button>
+</div>
+
+</div>
