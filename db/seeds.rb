@@ -18,6 +18,8 @@ comment_contents = [
   "Cet article est une excellente ressource pour ceux qui veulent en savoir plus sur ce sujet."
 ]
 
+image_errors = ["forest.jpg","forest2.jpg","forest3.jpg"]
+
 client = OpenAI::Client.new
 
 user1 = User.create!(email: "nour@mail.com", password: "test123", nickname: "bnoure")
@@ -68,7 +70,12 @@ all_articles.sample(25).each do |article|
   short_description = response_short['choices'].first['message']['content']
 
   post = Post.new(title: article.title, content: article.content, description: generated_text, url: article.url, urlI: article.urlToImage, user: users.sample, short: short_description)
-  post.image.attach(io: URI.open(article.urlToImage), filename: 'image.jpg', content_type: 'image/jpg') if article.urlToImage.present?
+  if article.urlToImage.present?
+    post.image.attach(io: URI.open(article.urlToImage), filename: 'image.jpg', content_type: 'image/jpg')
+  else
+    default_image = image_errors.sample
+    post.image.attach(io: File.open(Rails.root.join('app', 'assets', 'images', default_image)), filename: default_image, content_type: 'image/jpg')
+  end
   if post.save
     puts "Post #{post.id} created successfully"
     if [true, false].sample
