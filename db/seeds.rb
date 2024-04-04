@@ -1,6 +1,7 @@
 require 'news-api'
 require 'openai'
 
+
 User.destroy_all
 Post.destroy_all
 Comment.destroy_all
