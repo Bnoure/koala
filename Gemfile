@@ -31,6 +31,9 @@ gem "redis", ">= 4.0.1"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 
+#cloudinary
+gem "cloudinary"
+
 # gem "kredis"
 # AI API
 gem "ruby-openai"
