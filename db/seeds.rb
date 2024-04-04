@@ -19,6 +19,8 @@ comment_contents = [
   "Cet article est une excellente ressource pour ceux qui veulent en savoir plus sur ce sujet."
 ]
 
+image_errors = ["forest.jpg","forest2.jpg","forest3.jpg"]
+
 client = OpenAI::Client.new
 
 user1 = User.create!(email: "nour@mail.com", password: "test123", nickname: "bnoure")
@@ -41,6 +43,22 @@ all_articles = newsapi.get_everything(q: 'tourisme',
 all_articles.sample(25).each do |article|
   article.title = "Titre par défaut" if article.title.blank?
   article.content = "Contenu par défaut" if article.content.blank?
+
+   # Vérifie si le titre est vide et le remplace par une valeur générée par GPT-3
+   if article.title.blank?
+    response_title = client.chat(
+      parameters: {
+        model: "gpt-3.5-turbo-0301",
+        messages: [
+          { role: "system", content: "Tu es un journaliste." },
+          { role: "user", content: "Content: #{article['content']}\n\nCrée un titre pour cet article:" }
+        ],
+        temperature: 0.5,
+        max_tokens: 60
+      }
+    )
+    article.title = response_title['choices'].first['message']['content']
+  end
 
   response = client.chat(
     parameters: {
@@ -69,7 +87,16 @@ all_articles.sample(25).each do |article|
   short_description = response_short['choices'].first['message']['content']
 
   post = Post.new(title: article.title, content: article.content, description: generated_text, url: article.url, urlI: article.urlToImage, user: users.sample, short: short_description)
-  post.image.attach(io: URI.open(article.urlToImage), filename: 'image.jpg', content_type: 'image/jpg') if article.urlToImage.present?
+
+  if article.urlToImage.present?
+    uploaded_image = Cloudinary::Uploader.upload(article.urlToImage)
+    post.image.attach(io: URI.open(uploaded_image['url']), filename: File.basename(URI.parse(uploaded_image['url']).path))
+  else
+    default_image = image_errors.sample
+    uploaded_image = Cloudinary::Uploader.upload(Rails.root.join('app', 'assets', 'images', default_image))
+    post.image.attach(io: URI.open(uploaded_image['url']), filename: File.basename(URI.parse(uploaded_image['url']).path))
+  end
+  
   if post.save
     puts "Post #{post.id} created successfully"
     if [true, false].sample
