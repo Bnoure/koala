@@ -89,14 +89,14 @@ all_articles.sample(25).each do |article|
   post = Post.new(title: article.title, content: article.content, description: generated_text, url: article.url, urlI: article.urlToImage, user: users.sample, short: short_description)
 
   if article.urlToImage.present?
-    uploaded_image = Cloudinary::Uploader.upload(article.urlToImage)
+    uploaded_image = Cloudinary::Uploader.upload(article.urlToImage, :width => 500, :height => 200, :crop => :fill)
     post.image.attach(io: URI.open(uploaded_image['url']), filename: File.basename(URI.parse(uploaded_image['url']).path))
   else
     default_image = image_errors.sample
     uploaded_image = Cloudinary::Uploader.upload(Rails.root.join('app', 'assets', 'images', default_image))
     post.image.attach(io: URI.open(uploaded_image['url']), filename: File.basename(URI.parse(uploaded_image['url']).path))
   end
-  
+
   if post.save
     puts "Post #{post.id} created successfully"
     if [true, false].sample
